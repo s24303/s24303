@@ -2,28 +2,31 @@
 #include <string>
 #include <random>
 
-int main(int argc, char*argv[]){
+int main(){
   
   std::random_device rd;
   std::uniform_int_distribution <int> number (1, 100);
+
   
   int const num = number(rd);
   int guess;
   
-  while (num != guess)
+  do
   {
-  std::cout << "guess: ";
-  std::getline (std::cin, guess);
-  if (guess > num)
-     {
-       std::cout << "number too big!";
-     }
-  if else (guess < num)
-     {
-       std::cout << "number too small"; 
-     } 
+    std::cout << "guess: ";
+    std::cin >> guess;
+   
+    if (guess > num)
+       {
+         std::cout << "number too big! \n";
+       }
+    else if (guess < num)
+       {
+         std::cout << "number too small \n";       
+       }
+    else std::cout << "just right! \n";
   }
-  std::cout << "just right!";
+  while (guess != num);
   return 0;
 }
 
