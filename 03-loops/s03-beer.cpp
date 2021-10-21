@@ -4,10 +4,9 @@
 
 auto main(int argc, char *argv[]) -> int 
 {  
-  int number;  // = std::stoi(argv[1]);
+  int number; 
   int beer;
   if (argc == 0) return 1;
-  // if (argc != 0) beer = number;
   if (argv[1] == NULL)
   {  
     number = 99;
