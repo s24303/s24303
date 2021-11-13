@@ -6,7 +6,7 @@ int main()
 {
 	srand(time(NULL));
 
-        int n, s, s_id = 0;
+        int n, s, s_id = 17;
 
 	std::cout << "Podaj rozmiar tablicy: ";
 	std::cin >> n;
@@ -26,10 +26,11 @@ int main()
                 if (A[i] == s)
 		{
 			s_id = i;
-		}
+			std::cout << "Szukana liczba " << s << " ma indeks " << s_id << "\n";
+		};
         };
 
-	std::cout << "Szukana liczba " << s << " ma indeks " << s_id << "\n";
+	if (s_id == 17) std::cout << "-1 \n";
 
 	return 0;
 }
