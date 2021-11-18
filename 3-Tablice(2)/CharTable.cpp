@@ -1,15 +1,14 @@
-#include <iostream>
 #include <array>
+#include <iostream>
 
-int main()
+int main() 
 {
 	std::array<char, 94> ASCIItable;
 
-	for (int i=33; i<=126; i++)
+	for (int i = 33; i <= 126; i++) 
 	{
 		ASCIItable[i] = i;
-		std::cout << ASCIItable[i] << "\n";
-	}
+    		std::cout << ASCIItable[i] << "\n";
+  	}
 	return 0;
 }
-
