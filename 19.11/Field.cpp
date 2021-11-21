@@ -1,21 +1,24 @@
 #include <iostream>
 
+void end()
+{
+        for (int i = 0; i < 20; i++)
+                std::cout << "-";
+	std::cout << "\n";
+}
+
 void triangle(double a, double h)
 {
 	double wynik = a*h/2;
 	std::cout << "Pole tójkąta wynosi: " << wynik << "\n";
-	for (int i = 0; i < 20; i++)
-		std::cout << "-";
-	std::cout << "\n";
+	end();
 }
 
 void rectangle(double a, double b)
 {
 	double wynik = a*b;
 	std::cout << "Pole prostokąta wynosi: " << wynik << "\n"; 
-	for (int i = 0; i < 20; i++)
-		std::cout << "-";
-	std::cout << "\n";
+	end();
 }
 
 void circle(double r)
@@ -24,32 +27,28 @@ void circle(double r)
 	double wynik = (pi*r*r)/2;
 
 	std::cout << "Pole koła wynosi: " << wynik << "\n";
-	for (int i = 0; i < 20; i++)
-		std::cout << "-";
-	std::cout << "\n";
+	end();
 }
 
 void trapeze(double a, double b, double h)
 {
 	double wynik = ((a+b)*h)/2;
 	std::cout << "Pole trapeza wynosi: " << wynik << "\n";
-        for (int i = 0; i < 20; i++)
-                std::cout << "-";
-        std::cout << "\n";
+        end();
 }
 
 void hexagon(int a)
 {
 	double wynik = (3*a*a*1.7)/2;
 	std::cout << "Pole sześciokąta wynosi: " << wynik << "\n";
-        for (int i = 0; i < 20; i++)
-                std::cout << "-";
-        std::cout << "\n";
+        end();
 }
 
 void eror()
 {
 	std::cerr << "Błędne dane! \n";
+	std::cout << "\n";
+	end();
 }
 
 int main()

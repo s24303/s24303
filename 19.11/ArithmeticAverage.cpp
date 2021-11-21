@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 
 int main()
 {
@@ -11,10 +12,16 @@ int main()
 	{
 		std::cout << "Podaj " << tab.size()+1 << " wartość: ";
 		std::cin >> a;
-		tab.push_back(a);
+		if (!std::cin)
+		{
+			std::cerr << "Podaj liczbę! \n";
+			return 0;
+		}
+		else
+			tab.push_back(a);
 		rozmiar = tab.size();
 	}
-	while (a != 0);
+	while (a!=0);
 
 	for (int i = 0; i < rozmiar - 1; i++)
 	{

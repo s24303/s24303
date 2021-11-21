@@ -21,10 +21,15 @@ int main()
 		std::cout << "Podaj R: ";
 		std::cin >> R;
 	
-		if (H == 0 || r == 0 || R == 0)
-			std::cerr << "Błędne dane! Wartość nie może wynosić 0! \n";
-		else
+		if (H > 0 && r > 0 && R > 0)
 			size (H, r, R);
+		else if (!std::cin)
+		{
+			std::cerr << "Błędne dane! Podaj wartości liczbowe! \n";
+			return 0;
+		}
+		else
+			std::cerr << "Błędne dane! Wartość nie może wynosić 0! \n";
 	}
 	while (H != 0 || r != 0 || R != 0);
 	return 0;
