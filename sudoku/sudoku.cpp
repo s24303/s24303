@@ -2,14 +2,14 @@
 #include <string>
 
 const char *sudoku[9][9];
-char m = 0;
+int m;
 
 void menu()
 {
     std::cout << "Hello in sudoku game! \n \n";
     std::cout << "1. PLAY \n";
-    std::cout << "2. INSTRUCTION \n";
-    std::cout << "3. EXIT \n";
+    std::cout << "2. INSTRUCTION \n\n";
+    std::cout << "0. EXIT \n";
     std::cout << "================= \n";
     std::cout << "What you want to do (type number of an action): ";
     std::cin >> m;
@@ -120,23 +120,17 @@ int main()
     do
     {
         menu();
-        int im = (int)m;
-        switch (im)
-        {
-        case 1:
-            std::cout << "test";
-            break;
-        case 2:
-            break;
-        case 3:
-            return 0;
-            break;
-        default:
-            std::cerr << "Error! Wrong number, try again. \n";
-            menu();
-            break;
-        }
-    } while (m == 1 && m == 2 && m == 3);
+    } while (m < 0 || m > 2);
+
+    switch (m)
+    {
+    case 1:
+        std::cout << "test";
+        break;
+    default:
+        break;
+    }
+
     //easy();
     //display();
 }
