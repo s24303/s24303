@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 
-const char *sudoku[9][9];
+std::string sudoku[9][9];
+int value;
 int number, level;
+std::string cell;
 
 void menu()
 {
@@ -25,7 +27,6 @@ void lvl()
     std::cout << "3. HARD \n \n";
     std::cout << "0. EXIT \n";
     std::cin >> level;
-    std::cout << level;
 }
 
 void easy()
@@ -138,12 +139,27 @@ int main()
     switch (number)
     {
     case 1:
-        lvl();
+        do
+        {
+            lvl();
+        } while (level < 0 || level > 3);
+        switch (level)
+        {
+        case 1:
+        {
+            std::cout << "test";
+            break;
+        }
+        default:
+            break;
+        }
         break;
     default:
         break;
     }
-    //easy();
-    //display();
+
+    easy();
+    display();
+
     return 0;
 }
