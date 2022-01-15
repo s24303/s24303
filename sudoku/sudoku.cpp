@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 std::string sudoku[9][9];
-int value;
 int number, level;
-std::string cell;
 
 void menu()
 {
@@ -129,6 +128,25 @@ void display()
     std::cout << "===================================== \n";
 }
 
+void chceck(int int_i, int int_j, int value)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        int old_value;
+        sudoku[i][int_j] = old_value;
+        if (old_value = value)
+            std::cerr << "Wrong number! Try again.";
+    }
+
+    for (int j = 0; j < 9; j++)
+    {
+        int old_value;
+        sudoku[int_i][j] = old_value;
+        if (old_value = value)
+            std::cerr << "Wrong number! Try again.";
+    }
+}
+
 int main()
 {
     do
@@ -147,7 +165,27 @@ int main()
         {
         case 1:
         {
-            std::cout << "test";
+            easy();
+            display();
+            std::cout << "Which cell you want to edit? ";
+            std::string cell;
+            std::cin >> cell;
+            auto i = cell[0];
+            int int_i = i - 48;
+
+            auto j = cell[1];
+            int int_j = j - 48;
+
+            std::cout << "Enter value: ";
+            int value;
+            std::cin >> value;
+
+            std::string str_value = std::to_string(value);
+
+            sudoku[int_i][int_j] = str_value;
+            chceck(int_i, int_j, value);
+            //display();
+
             break;
         }
         default:
@@ -157,9 +195,6 @@ int main()
     default:
         break;
     }
-
-    easy();
-    display();
 
     return 0;
 }
