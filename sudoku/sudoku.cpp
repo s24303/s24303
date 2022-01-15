@@ -2,17 +2,30 @@
 #include <string>
 
 const char *sudoku[9][9];
-int m;
+int number, level;
 
 void menu()
 {
+    std::system("clear || cls"); // clear screen
     std::cout << "Hello in sudoku game! \n \n";
     std::cout << "1. PLAY \n";
     std::cout << "2. INSTRUCTION \n\n";
     std::cout << "0. EXIT \n";
     std::cout << "================= \n";
     std::cout << "What you want to do (type number of an action): ";
-    std::cin >> m;
+    std::cin >> number;
+}
+
+void lvl()
+{
+    std::system("clear || cls"); // clear screen
+    std::cout << "Choose your level: \n \n";
+    std::cout << "1. EASY \n";
+    std::cout << "2. MEDIUM \n";
+    std::cout << "3. HARD \n \n";
+    std::cout << "0. EXIT \n";
+    std::cin >> level;
+    std::cout << level;
 }
 
 void easy()
@@ -120,17 +133,17 @@ int main()
     do
     {
         menu();
-    } while (m < 0 || m > 2);
+    } while (number < 0 || number > 2);
 
-    switch (m)
+    switch (number)
     {
     case 1:
-        std::cout << "test";
+        lvl();
         break;
     default:
         break;
     }
-
     //easy();
     //display();
+    return 0;
 }
