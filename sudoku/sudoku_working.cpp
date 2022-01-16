@@ -141,6 +141,71 @@ void easy_lvl() //easy-level sudoku declaration
     sudoku[8][7] = " ";
     sudoku[8][8] = " ";
 }
+void easy_hint() //user can't change hints
+{
+    if (int_i == 0 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 0 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 0 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 6)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 4)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 4 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 4 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 4)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 2)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 5)
+        check_h = 0;
+    else
+        check_h = 1;
+}
 void test_lvl() //test level to check progress
 {
     sudoku[0][0] = "1";
@@ -306,71 +371,6 @@ void try_number() //checking inserted num,
         check_v = 1;
     else
         check_v = 0;
-}
-void easy_hint() //user can't change hints
-{
-    if (int_i == 0, int_j == 3)
-        check_h = 0;
-    else if (int_i == 0, int_j == 7)
-        check_h = 0;
-    else if (int_i == 0, int_j == 8)
-        check_h = 0;
-    else if (int_i == 1, int_j == 0)
-        check_h = 0;
-    else if (int_i == 1, int_j == 5)
-        check_h = 0;
-    else if (int_i == 1, int_j == 6)
-        check_h = 0;
-    else if (int_i == 2, int_j == 3)
-        check_h = 0;
-    else if (int_i == 2, int_j == 4)
-        check_h = 0;
-    else if (int_i == 2, int_j == 5)
-        check_h = 0;
-    else if (int_i == 2, int_j == 7)
-        check_h = 0;
-    else if (int_i == 2, int_j == 8)
-        check_h = 0;
-    else if (int_i == 3, int_j == 0)
-        check_h = 0;
-    else if (int_i == 3, int_j == 1)
-        check_h = 0;
-    else if (int_i == 3, int_j == 5)
-        check_h = 0;
-    else if (int_i == 4, int_j == 0)
-        check_h = 0;
-    else if (int_i == 4, int_j == 8)
-        check_h = 0;
-    else if (int_i == 5, int_j == 3)
-        check_h = 0;
-    else if (int_i == 5, int_j == 7)
-        check_h = 0;
-    else if (int_i == 5, int_j == 8)
-        check_h = 0;
-    else if (int_i == 6, int_j == 0)
-        check_h = 0;
-    else if (int_i == 6, int_j == 1)
-        check_h = 0;
-    else if (int_i == 6, int_j == 3)
-        check_h = 0;
-    else if (int_i == 6, int_j == 4)
-        check_h = 0;
-    else if (int_i == 6, int_j == 5)
-        check_h = 0;
-    else if (int_i == 7, int_j == 2)
-        check_h = 0;
-    else if (int_i == 7, int_j == 3)
-        check_h = 0;
-    else if (int_i == 7, int_j == 8)
-        check_h = 0;
-    else if (int_i == 8, int_j == 0)
-        check_h = 0;
-    else if (int_i == 8, int_j == 1)
-        check_h = 0;
-    else if (int_i == 8, int_j == 5)
-        check_h = 0;
-    else
-        check_h = 1;
 }
 
 int main()
