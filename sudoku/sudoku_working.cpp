@@ -3,7 +3,7 @@
 
 std::string sudoku[9][9];
 int number, level;
-bool finished = false, check = false, check_v = false;
+bool finished = false, check = false, check_v = false, check_h = false;
 int int_j, int_i, value;
 std::string str_value, cell;
 
@@ -307,8 +307,73 @@ void try_number() //checking inserted num,
     else
         check_v = 0;
 }
+void easy_hint() //user can't change hints
+{
+    if (int_i == 0, int_j == 3)
+        check_h = 0;
+    else if (int_i == 0, int_j == 7)
+        check_h = 0;
+    else if (int_i == 0, int_j == 8)
+        check_h = 0;
+    else if (int_i == 1, int_j == 0)
+        check_h = 0;
+    else if (int_i == 1, int_j == 5)
+        check_h = 0;
+    else if (int_i == 1, int_j == 6)
+        check_h = 0;
+    else if (int_i == 2, int_j == 3)
+        check_h = 0;
+    else if (int_i == 2, int_j == 4)
+        check_h = 0;
+    else if (int_i == 2, int_j == 5)
+        check_h = 0;
+    else if (int_i == 2, int_j == 7)
+        check_h = 0;
+    else if (int_i == 2, int_j == 8)
+        check_h = 0;
+    else if (int_i == 3, int_j == 0)
+        check_h = 0;
+    else if (int_i == 3, int_j == 1)
+        check_h = 0;
+    else if (int_i == 3, int_j == 5)
+        check_h = 0;
+    else if (int_i == 4, int_j == 0)
+        check_h = 0;
+    else if (int_i == 4, int_j == 8)
+        check_h = 0;
+    else if (int_i == 5, int_j == 3)
+        check_h = 0;
+    else if (int_i == 5, int_j == 7)
+        check_h = 0;
+    else if (int_i == 5, int_j == 8)
+        check_h = 0;
+    else if (int_i == 6, int_j == 0)
+        check_h = 0;
+    else if (int_i == 6, int_j == 1)
+        check_h = 0;
+    else if (int_i == 6, int_j == 3)
+        check_h = 0;
+    else if (int_i == 6, int_j == 4)
+        check_h = 0;
+    else if (int_i == 6, int_j == 5)
+        check_h = 0;
+    else if (int_i == 7, int_j == 2)
+        check_h = 0;
+    else if (int_i == 7, int_j == 3)
+        check_h = 0;
+    else if (int_i == 7, int_j == 8)
+        check_h = 0;
+    else if (int_i == 8, int_j == 0)
+        check_h = 0;
+    else if (int_i == 8, int_j == 1)
+        check_h = 0;
+    else if (int_i == 8, int_j == 5)
+        check_h = 0;
+    else
+        check_h = 1;
+}
 
-int main() //main program
+int main()
 {
 back:
     do
@@ -332,7 +397,8 @@ back:
             {
                 insert_number();
                 try_number();
-                if (check == 0 || check_v == 0)
+                easy_hint();
+                if (check == 0 || check_v == 0 || check_h == 0)
                 {
                     display();
                     std::cerr << "Error! Wrong number, try again. \n";
