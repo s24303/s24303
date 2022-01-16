@@ -143,7 +143,7 @@ void easy_lvl() //easy-level sudoku declaration
 }
 void test_lvl() //test level to check progress
 {
-    sudoku[0][0] = " ";
+    sudoku[0][0] = "1";
     sudoku[0][1] = "3";
     sudoku[0][2] = "7";
     sudoku[0][3] = "6";
@@ -264,18 +264,19 @@ void is_finished() //checking that sudoku is finished
     {
         for (int j = 0; j < 9; j++)
         {
-            auto val = (sudoku[i][j]);
-            if (val == check) //is cell filled with a number?
+            std::string val = " ";
+            if (val == sudoku[i][j]) //is cell filled with a number?
             {
                 finished = 0;
+                goto b;
             }
-            else
+            else if (val != sudoku[i][j])
                 finished = 1;
             std::cout << val;
         }
     }
-    std::cout << "\n"
-              << finished << "\n";
+b:
+    std::cout << "\n";
 }
 void try_number() //checking inserted num,
 {
@@ -319,7 +320,7 @@ back:
         switch (level)
         {
         case 1:
-            test_lvl();
+            easy_lvl();
             display();
             is_finished();
             while (finished == 0)
@@ -336,6 +337,7 @@ back:
                     sudoku[int_i][int_j] = str_value;
                     display();
                 };
+                continue;
                 is_finished();
             }
             display();
