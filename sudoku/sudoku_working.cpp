@@ -3,7 +3,7 @@
 
 std::string sudoku[9][9];
 int number, level;
-bool finished = false, check = true;
+bool finished = false, check = false, check_v = false;
 int int_j, int_i, value;
 std::string str_value, cell;
 
@@ -303,9 +303,9 @@ void try_number() //checking inserted num,
     }
 
     if (value > 0 && value < 10)
-        check = 1;
+        check_v = 1;
     else
-        check = 0;
+        check_v = 0;
 }
 
 int main() //main program
@@ -332,7 +332,7 @@ back:
             {
                 insert_number();
                 try_number();
-                if (check == 0)
+                if (check == 0 || check_v == 0)
                 {
                     display();
                     std::cerr << "Error! Wrong number, try again. \n";
