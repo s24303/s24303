@@ -301,6 +301,11 @@ void try_number() //checking inserted num,
             break;
         }
     }
+
+    if (value > 0 && value < 10)
+        check = 1;
+    else
+        check = 0;
 }
 
 int main() //main program
