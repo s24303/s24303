@@ -3,7 +3,22 @@
 
 std::string sudoku[9][9];
 int number, level;
-bool finished = false;
+bool finished = false, check = true;
+int int_j, int_i, value;
+std::string str_value, cell;
+
+enum letters //make input format wright
+{
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    G,
+    H,
+    I
+};
 
 void menu() //menu
 {
@@ -128,7 +143,7 @@ void easy_lvl() //easy-level sudoku declaration
 }
 void test_lvl() //test level to check progress
 {
-    sudoku[0][0] = "1";
+    sudoku[0][0] = " ";
     sudoku[0][1] = "3";
     sudoku[0][2] = "7";
     sudoku[0][3] = "6";
@@ -213,53 +228,76 @@ void test_lvl() //test level to check progress
 void display() //look for sudoku
 {
     std::system("clear || cls"); // clear screen
-    std::cout << "===================================== \n";
+    std::cout << "    A   B   C   D   E   F   G   H   I \n";
+    std::cout << "  ===================================== \n";
     for (int i = 0; i < 9; i++)
     {
-        std::cout << "|";
+        std::cout << i + 1 << " |";
         for (int j = 0; j < 9; j++)
         {
             std::cout << " " << sudoku[i][j] << " |";
         }
         std::cout << "\n";
     }
-    std::cout << "===================================== \n";
+    std::cout << "  ===================================== \n";
 }
 void insert_number() //filling sudoku
 {
-    std::cout << "Which cell you want to edit? ";
-    std::string cell;
+    std::cout << "Give me cell address and value: ";
     std::cin >> cell;
-    auto i = cell[0];
-    int int_i = i - 48;
+    auto i = cell[1];
+    int_i = i - 49;
 
-    auto j = cell[1];
-    int int_j = j - 48;
+    auto j = cell[0];
+    int_j = j - 65;
+    letters int_j;
 
-    std::cout << "Enter value: ";
-    int value;
-    std::cin >> value;
+    auto v = cell[2];
+    value = v - 48;
 
-    std::string str_value = std::to_string(value);
-
-    sudoku[int_i][int_j] = str_value;
+    str_value = std::to_string(value);
 }
 void is_finished() //checking that sudoku is finished
 {
-    std::string val;
 
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
         {
-            val = (sudoku[i][j]);
-            if (val.compare(" ") == 0) //is cell filled with a number?
+            auto val = (sudoku[i][j]);
+            if (val == check) //is cell filled with a number?
             {
                 finished = 0;
-                break;
             }
             else
                 finished = 1;
+            std::cout << val;
+        }
+    }
+    std::cout << "\n"
+              << finished << "\n";
+}
+void try_number() //checking inserted num,
+{
+    check = 1;
+
+    for (int i = 0; i < 9; i++)
+    {
+        std::string old_value = (sudoku[i][int_j]);
+        if (str_value == old_value)
+        {
+            check = 0;
+            break;
+        }
+    }
+
+    for (int j = 0; j < 9; j++)
+    {
+        std::string old_value = (sudoku[int_i][j]);
+        if (str_value == old_value)
+        {
+            check = 0;
+            break;
         }
     }
 }
@@ -283,6 +321,25 @@ back:
         case 1:
             test_lvl();
             display();
+            is_finished();
+            while (finished == 0)
+            {
+                insert_number();
+                try_number();
+                if (check == 0)
+                {
+                    display();
+                    std::cerr << "Error! Wrong number, try again. \n";
+                }
+                else
+                {
+                    sudoku[int_i][int_j] = str_value;
+                    display();
+                };
+                is_finished();
+            }
+            display();
+            std::cout << "Congratulations! You have just finished sudoku! \n";
             break;
         case 2:
             break;
