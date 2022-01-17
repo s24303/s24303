@@ -308,7 +308,7 @@ void display() //look for sudoku
 }
 void insert_number() //filling sudoku
 {
-    std::cout << "Give me cell address and value: ";
+    std::cout << "Give me cell address and value: (type \"0\" to get back) \n";
     std::cin >> cell;
     auto i = cell[1];
     int_i = i - 49;
@@ -375,17 +375,28 @@ void try_number() //checking inserted num,
 
 int main()
 {
+    char j, t = 0;
+    number = 3;
+
 back:
     do
+    {
         menu();
-    while (number < 0 || number > 2);
+        if (!std::cin)
+            goto back;
+    } while (number < 0 || number > 2);
 
     switch (number)
     {
     case 1:
-        do
+    back_lvl:
+        difficulty_lvl();
+        if (!std::cin)
+            goto back_lvl;
+        while (level < 0 && level > 3)
+        {
             difficulty_lvl();
-        while (level < 0 || level > 3);
+        };
 
         switch (level)
         {
@@ -398,7 +409,9 @@ back:
                 insert_number();
                 try_number();
                 easy_hint();
-                if (check == 0 || check_v == 0 || check_h == 0)
+                if (j == t)
+                    goto back_lvl;
+                else if (check == 0 || check_v == 0 || check_h == 0)
                 {
                     display();
                     std::cerr << "Error! Wrong number, try again. \n";
