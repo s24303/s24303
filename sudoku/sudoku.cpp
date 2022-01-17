@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
-
 std::string sudoku[9][9];
 int number, level;
-bool finished = false, check = false, check_v = false;
+bool finished = false, check = false, check_v = false, check_h = false;
 int int_j, int_i, value;
 std::string str_value, cell;
-
 enum letters //make input format wright
 {
     A,
@@ -19,7 +17,6 @@ enum letters //make input format wright
     H,
     I
 };
-
 void menu() //menu
 {
     std::system("clear || cls"); // clear screen
@@ -141,6 +138,71 @@ void easy_lvl() //easy-level sudoku declaration
     sudoku[8][7] = " ";
     sudoku[8][8] = " ";
 }
+void easy_hint() //user can't change hints
+{
+    if (int_i == 0 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 0 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 0 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 1 && int_j == 6)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 4)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 2 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 3 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 4 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 4 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 7)
+        check_h = 0;
+    else if (int_i == 5 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 4)
+        check_h = 0;
+    else if (int_i == 6 && int_j == 5)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 2)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 3)
+        check_h = 0;
+    else if (int_i == 7 && int_j == 8)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 0)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 1)
+        check_h = 0;
+    else if (int_i == 8 && int_j == 5)
+        check_h = 0;
+    else
+        check_h = 1;
+}
 void test_lvl() //test level to check progress
 {
     sudoku[0][0] = "1";
@@ -247,19 +309,15 @@ void insert_number() //filling sudoku
     std::cin >> cell;
     auto i = cell[1];
     int_i = i - 49;
-
     auto j = cell[0];
     int_j = j - 65;
     letters int_j;
-
     auto v = cell[2];
     value = v - 48;
-
     str_value = std::to_string(value);
 }
 void is_finished() //checking that sudoku is finished
 {
-
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -281,7 +339,6 @@ b:
 void try_number() //checking inserted num,
 {
     check = 1;
-
     for (int i = 0; i < 9; i++)
     {
         std::string old_value = (sudoku[i][int_j]);
@@ -291,7 +348,6 @@ void try_number() //checking inserted num,
             break;
         }
     }
-
     for (int j = 0; j < 9; j++)
     {
         std::string old_value = (sudoku[int_i][j]);
@@ -301,27 +357,25 @@ void try_number() //checking inserted num,
             break;
         }
     }
-
     if (value > 0 && value < 10)
         check_v = 1;
     else
         check_v = 0;
 }
 
-int main() //main program
+int main()
 {
+
 back:
     do
         menu();
     while (number < 0 || number > 2);
-
     switch (number)
     {
     case 1:
         do
             difficulty_lvl();
         while (level < 0 || level > 3);
-
         switch (level)
         {
         case 1:
@@ -332,7 +386,8 @@ back:
             {
                 insert_number();
                 try_number();
-                if (check == 0 || check_v == 0)
+                easy_hint();
+                if (check == 0 || check_v == 0 || check_h == 0)
                 {
                     display();
                     std::cerr << "Error! Wrong number, try again. \n";
@@ -356,11 +411,9 @@ back:
             goto back;
             break;
         }
-
         break;
     case 2:
         int exit_button;
-
     stay:
         instruction();
         std::cin >> exit_button;
@@ -373,6 +426,5 @@ back:
         exit(0);
         break;
     }
-
     return 0;
 }

@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
-
 std::string sudoku[9][9];
 int number, level;
 bool finished = false, check = false, check_v = false, check_h = false;
 int int_j, int_i, value;
 std::string str_value, cell;
-
 enum letters //make input format wright
 {
     A,
@@ -19,7 +17,6 @@ enum letters //make input format wright
     H,
     I
 };
-
 void menu() //menu
 {
     std::system("clear || cls"); // clear screen
@@ -308,23 +305,19 @@ void display() //look for sudoku
 }
 void insert_number() //filling sudoku
 {
-    std::cout << "Give me cell address and value: (type \"0\" to get back) \n";
+    std::cout << "Give me cell address and value: ";
     std::cin >> cell;
     auto i = cell[1];
     int_i = i - 49;
-
     auto j = cell[0];
     int_j = j - 65;
     letters int_j;
-
     auto v = cell[2];
     value = v - 48;
-
     str_value = std::to_string(value);
 }
 void is_finished() //checking that sudoku is finished
 {
-
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -346,7 +339,6 @@ b:
 void try_number() //checking inserted num,
 {
     check = 1;
-
     for (int i = 0; i < 9; i++)
     {
         std::string old_value = (sudoku[i][int_j]);
@@ -356,7 +348,6 @@ void try_number() //checking inserted num,
             break;
         }
     }
-
     for (int j = 0; j < 9; j++)
     {
         std::string old_value = (sudoku[int_i][j]);
@@ -366,7 +357,6 @@ void try_number() //checking inserted num,
             break;
         }
     }
-
     if (value > 0 && value < 10)
         check_v = 1;
     else
@@ -375,29 +365,17 @@ void try_number() //checking inserted num,
 
 int main()
 {
-    char j, t = 0;
-    number = 3;
 
 back:
     do
-    {
         menu();
-        if (!std::cin)
-            goto back;
-    } while (number < 0 || number > 2);
-
+    while (number < 0 || number > 2);
     switch (number)
     {
     case 1:
-    back_lvl:
-        difficulty_lvl();
-        if (!std::cin)
-            goto back_lvl;
-        while (level < 0 && level > 3)
-        {
+        do
             difficulty_lvl();
-        };
-
+        while (level < 0 || level > 3);
         switch (level)
         {
         case 1:
@@ -409,9 +387,7 @@ back:
                 insert_number();
                 try_number();
                 easy_hint();
-                if (j == t)
-                    goto back_lvl;
-                else if (check == 0 || check_v == 0 || check_h == 0)
+                if (check == 0 || check_v == 0 || check_h == 0)
                 {
                     display();
                     std::cerr << "Error! Wrong number, try again. \n";
@@ -435,11 +411,9 @@ back:
             goto back;
             break;
         }
-
         break;
     case 2:
         int exit_button;
-
     stay:
         instruction();
         std::cin >> exit_button;
@@ -452,6 +426,5 @@ back:
         exit(0);
         break;
     }
-
     return 0;
 }
