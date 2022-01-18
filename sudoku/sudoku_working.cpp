@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 std::string sudoku[9][9];
 int number, level;
 bool finished = false, check = false, check_v = false, check_h = false;
@@ -9,43 +10,42 @@ std::string str_value, cell, num, lvl;
 void menu() //menu
 {
     std::system("clear || cls"); // clear screen
-    std::cout << "Hello in sudoku game! \n \n";
-    std::cout << "1. PLAY \n";
-    std::cout << "2. INSTRUCTION \n\n";
-    std::cout << "0. EXIT \n";
-    std::cout << "================= \n";
-    std::cout << "What you want to do (type number of an action): ";
+    std::cout << "Hello in sudoku game! \n \n"
+              << "1. PLAY \n"
+              << "2. INSTRUCTION \n\n"
+              << "0. EXIT \n"
+              << "================= \n"
+              << "What you want to do (type number of an action): ";
     std::cin >> num;
 }
 void lvl_menu() //choose level of difficulty
 {
     std::system("clear || cls"); // clear screen
-    std::cout << "Choose your level: \n \n";
-    std::cout << "1. EASY \n";
-    std::cout << "2. MEDIUM \n";
-    std::cout << "3. HARD \n \n";
-    std::cout << "0. BACK \n";
+    std::cout << "Choose your level: \n \n"
+              << "1. EASY \n"
+              << "2. MEDIUM \n"
+              << "3. HARD \n \n"
+              << "0. BACK \n";
     std::cin >> lvl;
 }
 void instruction() // display an instruction
 {
     std::system("clear || cls"); // clear screen
-    std::cout << "1. Only use the numbers 1 to 9, \n";
-    std::cout << "2. Avoid trying to guess the solution to the puzzle, \n";
-    std::cout << "3. Only use each number once in each row, column, & grid, \n";
-    std::cout << "4. Use the process of elimination as a tactic. \n \n";
-    std::cout << "================================================== \n";
-    std::cout << "How to play? \n";
-    std::cout << "As first choose which cell you want to edit, \n";
-    std::cout << "type it in format: \"A4\". \n";
-    std::cout << "Next insert an value from 1-9 \n";
-    std::cout << "and keep going till finish. \n";
-    std::cout << "Good luck! \n \n";
-    std::cout << "(insert 0 to go back) \n";
+    std::cout << "1. Only use the numbers 1 to 9, \n"
+              << "2. Avoid trying to guess the solution to the puzzle, \n"
+              << "3. Only use each number once in each row, column, & grid, \n"
+              << "4. Use the process of elimination as a tactic. \n \n"
+              << "================================================== \n"
+              << "How to play? \n"
+              << "As first choose which cell you want to edit and value of it, \n"
+              << "type it in format: \"A43\". \n"
+              << "and keep going till finish. \n"
+              << "Good luck! \n \n"
+              << "(insert 0 to go back) \n";
 }
 void easy_lvl() //easy-level sudoku declaration
 {
-    sudoku[0][0] = " ";
+    sudoku[9][9] = {" ", " ", ""};
     sudoku[0][1] = " ";
     sudoku[0][2] = " ";
     sudoku[0][3] = "6";
@@ -491,15 +491,13 @@ void hard_hint() //user can't change hints
 void display() //look for sudoku
 {
     std::system("clear || cls"); // clear screen
-    std::cout << "    A   B   C   D   E   F   G   H   I \n";
-    std::cout << "  ===================================== \n";
+    std::cout << "    A   B   C   D   E   F   G   H   I \n"
+              << "  ===================================== \n";
     for (int i = 0; i < 9; i++)
     {
         std::cout << i + 1 << " |";
         for (int j = 0; j < 9; j++)
-        {
             std::cout << " " << sudoku[i][j] << " |";
-        }
         std::cout << "\n";
     }
     std::cout << "  ===================================== \n";
@@ -508,12 +506,10 @@ void insert_number() //filling sudoku
 {
     std::cout << "Give me cell address and value: ";
     std::cin >> cell;
-    auto i = cell[1];
-    int_i = i - 49;
-    auto j = cell[0];
-    int_j = j - 65;
-    auto v = cell[2];
-    value = v - 48;
+    auto int_i = cell[1] - 49;
+    auto int_j = cell[0] - 65;
+    auto value = cell[2] - 48;
+
     str_value = std::to_string(value);
 }
 void is_finished() //checking that sudoku is finished
@@ -530,7 +526,6 @@ void is_finished() //checking that sudoku is finished
             }
             else if (val != sudoku[i][j])
                 finished = 1;
-            std::cout << val;
         }
     }
 b:
@@ -565,7 +560,6 @@ void try_number() //checking inserted num,
 
 int main()
 {
-
 back:
     do
     {
@@ -600,7 +594,6 @@ back:
                 {
                     try_number();
                     easy_hint();
-
                     if (check == 0 || check_v == 0 || check_h == 0)
                     {
                         display();
