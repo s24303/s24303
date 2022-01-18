@@ -5,18 +5,7 @@ int number, level;
 bool finished = false, check = false, check_v = false, check_h = false;
 int int_j, int_i, value;
 std::string str_value, cell, num, lvl;
-enum letters //make input format wright
-{
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I
-};
+
 void menu() //menu
 {
     std::system("clear || cls"); // clear screen
@@ -523,7 +512,6 @@ void insert_number() //filling sudoku
     int_i = i - 49;
     auto j = cell[0];
     int_j = j - 65;
-    letters int_j;
     auto v = cell[2];
     value = v - 48;
     str_value = std::to_string(value);
