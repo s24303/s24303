@@ -45,7 +45,7 @@ void instruction() // display an instruction
 }
 void easy_lvl() //easy-level sudoku declaration
 {
-    sudoku[9][9] = {" ", " ", ""};
+    sudoku[0][0] = " ";
     sudoku[0][1] = " ";
     sudoku[0][2] = " ";
     sudoku[0][3] = "6";
