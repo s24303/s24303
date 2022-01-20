@@ -568,7 +568,7 @@ auto insert_number(int level) -> void //filling sudoku
 
     std::cout << "Give me cell address and value (type 0 to exit):";
     std::cin >> cell;
-    if (cell.size() > 0 && cell.size() < 4)
+    if (cell.size() == 3)
     {
         int int_i = cell[1] - 49;
         int int_j = cell[0];
@@ -605,13 +605,11 @@ auto insert_number(int level) -> void //filling sudoku
     }
     else if (cell == "0")
         exit(0);
-    else
-        std::cerr << "Wrong number! Try again. \n";
 }
 auto sudoku_finished() -> void //let user know that he have finished
 {
     display();
-    std::cout << "Congratulations! You have just finished sudoku! \n";
+    std::cout << "\nCongratulations! You have just finished sudoku! \n";
 }
 
 int main()
