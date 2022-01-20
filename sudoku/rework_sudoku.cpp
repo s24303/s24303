@@ -48,7 +48,6 @@ auto lvl_menu() -> int //choose level of difficulty
 auto instruction() -> void // display an instruction
 {
     std::string go;
-    bool go_back = 0;
 
     std::system("clear || cls"); // clear screen
     std::cout << "1. Only use the numbers 1 to 9, \n"
@@ -607,7 +606,7 @@ auto insert_number(int level) -> void //filling sudoku
     else
         exit(0);
 }
-auto sudoku_finished() -> void
+auto sudoku_finished() -> void //let user know that he have finished
 {
     display();
     std::cout << "Congratulations! You have just finished sudoku! \n";
@@ -622,7 +621,6 @@ back:
     {
     case 1:
     {
-    back_lvl:
         auto level{lvl_menu()};
 
         switch (level)

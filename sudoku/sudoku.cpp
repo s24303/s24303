@@ -514,8 +514,6 @@ auto display() -> void //look for sudoku
               << "  ===================================== \n";
     for (int i = 0; i < 9; i++)
     {
-        if (i % 3 == 0)
-            std::cout << "  ------------------------------------- \n";
         std::cout << i + 1 << " |";
         for (int j = 0; j < 9; j++)
             std::cout << " " << sudoku[i][j] << " |";
