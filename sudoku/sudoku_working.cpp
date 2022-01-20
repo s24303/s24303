@@ -1,35 +1,54 @@
 #include <iostream>
 #include <string>
+#include <unistd.h>
 
-std::string sudoku[9][9];
-int number, level;
-bool finished = false, check = false, check_v = false, check_h = false;
-int int_j, int_i, value;
-std::string str_value, cell, num, lvl;
+std::string sudoku[9][9], val, cell;
+bool finished, check, check_h;
+int int_i;
 
-void menu() //menu
+auto menu() -> int //menu
 {
-    std::system("clear || cls"); // clear screen
-    std::cout << "Hello in sudoku game! \n \n"
-              << "1. PLAY \n"
-              << "2. INSTRUCTION \n\n"
-              << "0. EXIT \n"
-              << "================= \n"
-              << "What you want to do (type number of an action): ";
-    std::cin >> num;
+    std::string num;
+    int number;
+
+    do
+    {
+        std::system("clear || cls"); // clear screen
+        std::cout << "Hello in sudoku game! \n \n"
+                  << "1. PLAY \n"
+                  << "2. INSTRUCTION \n\n"
+                  << "0. EXIT \n"
+                  << "================= \n"
+                  << "What you want to do (type number of an action): ";
+        std::cin >> num;
+        number = num[0] - 48;
+    } while (number < 0 || number > 2 || num.size() > 1);
+
+    return number;
 }
-void lvl_menu() //choose level of difficulty
+auto lvl_menu() -> int //choose level of difficulty
 {
-    std::system("clear || cls"); // clear screen
-    std::cout << "Choose your level: \n \n"
-              << "1. EASY \n"
-              << "2. MEDIUM \n"
-              << "3. HARD \n \n"
-              << "0. BACK \n";
-    std::cin >> lvl;
+    std::string lvl;
+    int level;
+
+    do
+    {
+        std::system("clear || cls"); // clear screen
+        std::cout << "Choose your level: \n \n"
+                  << "1. EASY \n"
+                  << "2. MEDIUM \n"
+                  << "3. HARD \n \n"
+                  << "0. BACK \n";
+        std::cin >> lvl;
+        level = lvl[0] - 48;
+    } while (level < 0 || level > 3 || lvl.size() > 1);
+
+    return level;
 }
-void instruction() // display an instruction
+auto instruction() -> void // display an instruction
 {
+    std::string go;
+
     std::system("clear || cls"); // clear screen
     std::cout << "1. Only use the numbers 1 to 9, \n"
               << "2. Avoid trying to guess the solution to the puzzle, \n"
@@ -43,7 +62,7 @@ void instruction() // display an instruction
               << "Good luck! \n \n"
               << "(insert 0 to go back) \n";
 }
-void easy_lvl() //easy-level sudoku declaration
+auto easy_lvl() -> void //easy-level sudoku declaration
 {
     sudoku[0][0] = " ";
     sudoku[0][1] = " ";
@@ -127,7 +146,7 @@ void easy_lvl() //easy-level sudoku declaration
     sudoku[8][7] = " ";
     sudoku[8][8] = " ";
 }
-void easy_hint() //user can't change hints
+auto easy_hint(int int_i, int int_j) -> void //user can't change hints
 {
     if (int_i == 0 && int_j == 3)
         check_h = 0;
@@ -192,7 +211,7 @@ void easy_hint() //user can't change hints
     else
         check_h = 1;
 }
-void medium_lvl() //medium-level sudoku declaration
+auto medium_lvl() -> void //medium-level sudoku declaration
 {
     sudoku[0][0] = "2";
     sudoku[0][1] = " ";
@@ -276,7 +295,7 @@ void medium_lvl() //medium-level sudoku declaration
     sudoku[8][7] = " ";
     sudoku[8][8] = "5";
 }
-void medium_hint() //user can't change hints
+auto medium_hint(int int_i, int int_j) -> void //user can't change hints
 {
     if (int_i == 0 && int_j == 0)
         check_h = 0;
@@ -339,7 +358,7 @@ void medium_hint() //user can't change hints
     else
         check_h = 1;
 }
-void hard_lvl() //hard-level sudoku declaration
+auto hard_lvl() -> void //hard-level sudoku declaration
 {
     sudoku[0][0] = " ";
     sudoku[0][1] = " ";
@@ -423,7 +442,7 @@ void hard_lvl() //hard-level sudoku declaration
     sudoku[8][7] = " ";
     sudoku[8][8] = " ";
 }
-void hard_hint() //user can't change hints
+auto hard_hint(int int_i, int int_j) -> void //user can't change hints
 {
     if (int_i == 0 && int_j == 2)
         check_h = 0;
@@ -488,7 +507,7 @@ void hard_hint() //user can't change hints
     else
         check_h = 1;
 }
-void display() //look for sudoku
+auto display() -> void //look for sudoku
 {
     std::system("clear || cls"); // clear screen
     std::cout << "    A   B   C   D   E   F   G   H   I \n"
@@ -500,22 +519,9 @@ void display() //look for sudoku
             std::cout << " " << sudoku[i][j] << " |";
         std::cout << "\n";
     }
-    std::cout << "  ===================================== \n";
+    std::cout << "  ===================================== ";
 }
-void insert_number() //filling sudoku
-{
-    std::cout << "Give me cell address and value: ";
-    std::cin >> cell;
-    auto i = cell[1];
-    int_i = i - 49;
-    auto j = cell[0];
-    int_j = j - 39;
-    auto val = cell[2];
-    value = val;
-
-    str_value = std::to_string(value);
-}
-void is_finished() //checking that sudoku is finished
+auto is_finished() -> void //checking that sudoku is finished
 {
     for (int i = 0; i < 9; i++)
     {
@@ -534,13 +540,13 @@ void is_finished() //checking that sudoku is finished
 b:
     std::cout << "\n";
 }
-void try_number() //checking inserted num,
+auto try_number(int int_i, int int_j, std::string value) -> void //checking inserted num,
 {
     check = 1;
     for (int i = 0; i < 9; i++)
     {
         std::string old_value = (sudoku[i][int_j]);
-        if (str_value == old_value)
+        if (value == old_value)
         {
             check = 0;
             break;
@@ -549,149 +555,130 @@ void try_number() //checking inserted num,
     for (int j = 0; j < 9; j++)
     {
         std::string old_value = (sudoku[int_i][j]);
-        if (str_value == old_value)
+        if (value == old_value)
         {
             check = 0;
             break;
         }
     }
-    if (value > 0 && value < 10)
-        check_v = 1;
+}
+auto insert_number(int level) -> void //filling sudoku
+{
+    std::string cell;
+
+    std::cout << "Give me cell address and value (type 0 to exit):";
+    std::cin >> cell;
+    if (cell.size() > 0 && cell.size() < 4)
+    {
+        int int_i = cell[1] - 49;
+        int int_j = cell[0];
+        if (int_j > 64 && int_j < 74)
+            int_j = int_j - 65;
+        else if (int_j > 96 && int_j < 106)
+            int_j = int_j - 97;
+        else
+            std::cerr << "Error! Wrong cell letter. \n";
+        int val = cell[2] - 48;
+
+        std::string value = std::to_string(val);
+        try_number(int_i, int_j, value);
+
+        switch (level)
+        {
+        case 1:
+            easy_hint(int_i, int_j);
+            break;
+        case 2:
+            medium_hint(int_i, int_j);
+            break;
+        case 3:
+            medium_hint(int_i, int_j);
+            break;
+        }
+        if (check == 1 && check_h == 1)
+            sudoku[int_i][int_j] = value;
+        else
+        {
+            std::cout << "Wrong number! Try again. \n";
+            usleep(750000); //freeze screen for
+        }
+    }
+    else if (cell == "0")
+        exit(0);
     else
-        check_v = 0;
+        std::cerr << "Wrong number! Try again. \n";
+}
+auto sudoku_finished() -> void //let user know that he have finished
+{
+    display();
+    std::cout << "Congratulations! You have just finished sudoku! \n";
 }
 
 int main()
 {
 back:
-    do
-    {
-        menu();
-        if (num.size() > 1)
-            goto back;
-        number = num[0] - 48;
-    } while (number < 0 || number > 2);
-    switch (number)
+    auto select{menu()};
+
+    switch (select)
     {
     case 1:
-    back_lvl:
-        do
-        {
-            lvl_menu();
-            if (lvl.size() > 1)
-                goto back_lvl;
-            level = lvl[0] - 48;
-        } while (level < 0 || level > 3);
+    {
+        auto level{lvl_menu()};
+
         switch (level)
         {
         case 1:
             easy_lvl();
             display();
             is_finished();
-            while (finished == 0)
+            do
             {
-                insert_number();
-                if (cell == "0")
-                    goto back_lvl;
-                else
-                {
-                    try_number();
-                    easy_hint();
-                    if (check == 0 || check_v == 0 || check_h == 0)
-                    {
-                        display();
-                        std::cerr << "Error! Wrong number, try again. \n";
-                    }
-                    else
-                    {
-                        sudoku[int_i][int_j] = str_value;
-                        display();
-                    };
-                    continue;
-                    is_finished();
-                }
+                insert_number(level);
                 display();
-                std::cout << "Congratulations! You have just finished sudoku! \n";
-            }
+                is_finished();
+            } while (finished == 0);
+            sudoku_finished();
             break;
         case 2:
             medium_lvl();
             display();
             is_finished();
-            while (finished == 0)
+            do
             {
-                insert_number();
-                if (cell == "0")
-                    goto back_lvl;
-                else
-                {
-                    try_number();
-                    medium_hint();
-                    if (check == 0 || check_v == 0 || check_h == 0)
-                    {
-                        display();
-                        std::cerr << "Error! Wrong number, try again. \n";
-                    }
-                    else
-                    {
-                        sudoku[int_i][int_j] = str_value;
-                        display();
-                    };
-                    continue;
-                    is_finished();
-                }
-            }
-            display();
-            std::cout << "Congratulations! You have just finished sudoku! \n";
+                insert_number(level);
+                display();
+            } while (finished == 0);
+            sudoku_finished();
             break;
         case 3:
             hard_lvl();
             display();
             is_finished();
-            while (finished == 0)
+            do
             {
-                insert_number();
-                if (cell == "0")
-                    goto back_lvl;
-                else
-                {
-                    try_number();
-                    hard_hint();
-                    if (check == 0 || check_v == 0 || check_h == 0)
-                    {
-                        display();
-                        std::cerr << "Error! Wrong number, try again. \n";
-                    }
-                    else
-                    {
-                        sudoku[int_i][int_j] = str_value;
-                        display();
-                    };
-                    continue;
-                    is_finished();
-                }
-            }
-            display();
-            std::cout << "Congratulations! You have just finished sudoku! \n";
+                insert_number(level);
+                display();
+            } while (finished == 0);
+            sudoku_finished();
             break;
         case 0:
             goto back;
             break;
         }
         break;
+    }
     case 2:
-        int exit_button;
+    {
+        std::string exit_button;
     stay:
         instruction();
         std::cin >> exit_button;
-        if (exit_button == 0)
+        if (exit_button == "0")
             goto back;
         else
             goto stay;
         break;
-    case 0:
-        exit(0);
-        break;
+        return 0;
     }
-    return 0;
+    }
 }

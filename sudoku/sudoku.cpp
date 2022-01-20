@@ -519,7 +519,7 @@ auto display() -> void //look for sudoku
             std::cout << " " << sudoku[i][j] << " |";
         std::cout << "\n";
     }
-    std::cout << "  ===================================== \n";
+    std::cout << "  ===================================== ";
 }
 auto is_finished() -> void //checking that sudoku is finished
 {
@@ -568,7 +568,7 @@ auto insert_number(int level) -> void //filling sudoku
 
     std::cout << "Give me cell address and value (type 0 to exit):";
     std::cin >> cell;
-    if (cell != "0")
+    if (cell.size() > 0 && cell.size() < 4)
     {
         int int_i = cell[1] - 49;
         int int_j = cell[0];
@@ -577,7 +577,7 @@ auto insert_number(int level) -> void //filling sudoku
         else if (int_j > 96 && int_j < 106)
             int_j = int_j - 97;
         else
-            std::cerr << "Error! Wrong cell letter.";
+            std::cerr << "Error! Wrong cell letter. \n";
         int val = cell[2] - 48;
 
         std::string value = std::to_string(val);
@@ -599,14 +599,16 @@ auto insert_number(int level) -> void //filling sudoku
             sudoku[int_i][int_j] = value;
         else
         {
-            std::cout << "Wrong number! Try again.";
+            std::cout << "Wrong number! Try again. \n";
             usleep(750000); //freeze screen for
         }
     }
-    else
+    else if (cell == "0")
         exit(0);
+    else
+        std::cerr << "Wrong number! Try again. \n";
 }
-auto sudoku_finished() -> void //let know user that he gave finshed
+auto sudoku_finished() -> void //let user know that he have finished
 {
     display();
     std::cout << "Congratulations! You have just finished sudoku! \n";
@@ -633,6 +635,7 @@ back:
             {
                 insert_number(level);
                 display();
+                is_finished();
             } while (finished == 0);
             sudoku_finished();
             break;
