@@ -506,9 +506,12 @@ void insert_number() //filling sudoku
 {
     std::cout << "Give me cell address and value: ";
     std::cin >> cell;
-    auto int_i = cell[1] - 49;
-    auto int_j = cell[0] - 65;
-    auto value = cell[2] - 48;
+    auto i = cell[1];
+    int_i = i - 49;
+    auto j = cell[0];
+    int_j = j - 39;
+    auto val = cell[2];
+    value = val;
 
     str_value = std::to_string(value);
 }
